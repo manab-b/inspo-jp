@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>青葉歯科医院｜新宿駅徒歩4分・予約優先</title>
+  <meta name="description" content="東京都新宿区の青葉歯科医院。信頼を先に、予約から来院まで迷わない医院サイトのデモです。実在の医院とは無関係です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sumi: #1a1a1a;
+      --sumi-soft: #333333;
+      --navy: #1b365d;
+      --navy-deep: #12243f;
+      --kinari: #faf7f2;
+      --paper: #fffefb;
+      --line: #e6e1d8;
+      --alert: #9b1c1c;
+      --gutter: 24px;
+      --content: 1080px;
+      --section-y: 72px;
+      --tap: 44px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--sumi);
+      background: var(--paper);
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--navy); }
+    h1, h2, h3 {
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.06em;
+      margin: 0;
+    }
+    p { margin: 0; }
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -80px;
+      z-index: 20;
+      min-height: var(--tap);
+      padding: 10px 16px;
+      background: var(--navy);
+      color: #fff;
+    }
+    .skip:focus { top: 12px; }
+
+    .wrap {
+      width: min(var(--content), calc(100% - var(--gutter) * 2));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--kinari) 92%, white);
+      backdrop-filter: blur(10px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 72px;
+    }
+    .brand {
+      display: grid;
+      gap: 0;
+      text-decoration: none;
+      color: var(--sumi);
+    }
+    .brand small {
+      font-size: 16px;
+      letter-spacing: 0.12em;
+      color: var(--navy);
+    }
+    .brand strong {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+    .nav-toggle {
+      display: none;
+    }
+    .nav-open {
+      display: none;
+      min-width: var(--tap);
+      min-height: var(--tap);
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+    }
+    .primary-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px 28px;
+    }
+    .primary-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+      text-decoration: none;
+      color: var(--sumi);
+    }
+    .tel-chip,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--tap);
+      padding: 0 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .tel-chip {
+      background: var(--navy);
+      color: #fff;
+      white-space: nowrap;
+    }
+    .btn-navy {
+      background: var(--navy);
+      color: #fff;
+      border: 1px solid var(--navy);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--navy);
+      border: 1px solid currentColor;
+    }
+    .btn-paper {
+      background: var(--kinari);
+      color: var(--navy);
+    }
+
+    .hero {
+      padding: 96px 0 80px;
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--navy) 22%, transparent) 0 8px, transparent 8px),
+        linear-gradient(180deg, var(--kinari), var(--paper) 72%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .kicker {
+      color: var(--navy);
+      letter-spacing: 0.16em;
+      font-size: 16px;
+    }
+    .hero h1 {
+      margin-top: 16px;
+      font-size: clamp(32px, 4.4vw, 48px);
+    }
+    .hero .lead {
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--sumi-soft);
+      max-width: 38em;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .hours-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 28px;
+      box-shadow: 0 16px 40px color-mix(in srgb, var(--navy) 8%, transparent);
+    }
+    .hours-card h2 {
+      font-size: 18px;
+    }
+    .hours-card dl {
+      margin: 16px 0 0;
+    }
+    .hours-card div {
+      display: grid;
+      grid-template-columns: 7em 1fr;
+      gap: 8px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+    }
+    .hours-card dt { color: var(--navy); font-weight: 500; }
+    .note {
+      margin-top: 16px;
+      font-size: 16px;
+      color: var(--sumi-soft);
+    }
+
+    .trust {
+      padding: var(--section-y) 0;
+      background: #fff;
+      border-block: 1px solid var(--line);
+    }
+    .trust-grid,
+    .cards,
+    .split {
+      display: grid;
+      gap: 24px;
+    }
+    .trust-grid { grid-template-columns: repeat(3, 1fr); }
+    .trust article,
+    .card {
+      padding: 28px;
+      background: var(--kinari);
+      border: 1px solid var(--line);
+    }
+    .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: var(--tap);
+      min-height: var(--tap);
+      border: 1px solid var(--navy);
+      color: var(--navy);
+      letter-spacing: 0.08em;
+    }
+    .trust h3, .card h3, .guide article h3 {
+      margin-top: 16px;
+      font-size: 20px;
+    }
+    .section {
+      padding: var(--section-y) 0;
+    }
+    .section h2 {
+      font-size: 28px;
+    }
+    .section-lead {
+      margin-top: 12px;
+      max-width: 42em;
+      color: var(--sumi-soft);
+    }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .guide article {
+      padding: 28px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .doctors {
+      background: var(--kinari);
+    }
+    .split { grid-template-columns: 1fr 1fr; margin-top: 40px; }
+    .portrait {
+      min-height: 280px;
+      background:
+        radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--navy) 18%, var(--kinari)), transparent 42%),
+        linear-gradient(160deg, #d9e2ee, #f3eee6 58%, #c9d4e4);
+      border: 1px solid var(--line);
+    }
+    .muted-panel {
+      padding: 28px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .price {
+      padding: 28px;
+      background: var(--kinari);
+      border: 1px solid var(--line);
+    }
+    .price .yen {
+      margin-top: 16px;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+    }
+
+    .cta-band {
+      background: var(--navy-deep);
+      color: var(--kinari);
+      text-align: center;
+      padding: 80px var(--gutter);
+    }
+    .cta-band h2 {
+      margin-top: 8px;
+      font-size: 32px;
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .map-placeholder {
+      min-height: 280px;
+      border: 1px solid var(--line);
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 23px, color-mix(in srgb, var(--navy) 8%, transparent) 24px),
+        repeating-linear-gradient(0deg, transparent, transparent 23px, color-mix(in srgb, var(--navy) 8%, transparent) 24px),
+        linear-gradient(180deg, #eef2f6, #f7f3ec);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .pin {
+      width: 16px;
+      height: 16px;
+      margin: 0 auto 12px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: var(--navy);
+    }
+
+    form.reserve {
+      margin-top: 40px;
+      padding: 32px;
+      background: var(--kinari);
+      border: 1px solid var(--line);
+      display: grid;
+      gap: 20px;
+      max-width: 760px;
+    }
+    .pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    label {
+      display: grid;
+      gap: 8px;
+    }
+    .req {
+      color: var(--alert);
+      margin-left: 8px;
+      font-size: 16px;
+    }
+    input, select, textarea {
+      min-height: var(--tap);
+      padding: 10px 12px;
+      border: 1px solid #d8d2c8;
+      background: #fff;
+      width: 100%;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .success {
+      display: none;
+      padding: 16px;
+      background: #fff;
+      border: 1px solid var(--navy);
+    }
+    form.reserve.is-sent .success { display: block; }
+    form.reserve.is-sent .fields { display: none; }
+
+    .faq-list {
+      margin-top: 32px;
+      display: grid;
+      gap: 12px;
+      max-width: 760px;
+    }
+    details {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 8px 20px 12px;
+    }
+    summary {
+      min-height: var(--tap);
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    details p { color: var(--sumi-soft); padding-bottom: 8px; }
+
+    table.info {
+      width: 100%;
+      margin-top: 32px;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    table.info th,
+    table.info td {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-weight: 400;
+    }
+    table.info th {
+      width: 32%;
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    .legal-block {
+      background: var(--kinari);
+    }
+
+    footer {
+      background: var(--navy-deep);
+      color: var(--kinari);
+      padding: 48px 0 32px;
+    }
+    footer a { color: var(--kinari); }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 32px;
+    }
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--tap);
+      text-decoration: none;
+    }
+    .copy {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid color-mix(in srgb, var(--kinari) 24%, transparent);
+      font-size: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .nav-open { display: inline-flex; }
+      .primary-nav, .header-inner .tel-chip { display: none; }
+      .nav-toggle:checked ~ .primary-nav {
+        display: grid;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 72px;
+        background: var(--kinari);
+        border-bottom: 1px solid var(--line);
+        padding: 12px 24px 20px;
+        gap: 4px;
+      }
+      .hero, .hero-grid, .trust-grid, .guide-grid, .split, .price-grid, .access-grid, .pair, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding: 56px 0 48px; }
+      .section, .trust, .doctors { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">本文へスキップ</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">
+        <small>新宿駅西口 徒歩4分</small>
+        <strong>青葉歯科医院</strong>
+      </a>
+      <input class="nav-toggle" id="nav-toggle" type="checkbox">
+      <label class="nav-open" for="nav-toggle">メニュー</label>
+      <nav class="primary-nav" aria-label="主要">
+        <a href="#guide">診療案内</a>
+        <a href="#doctors">医師紹介</a>
+        <a href="#price">料金</a>
+        <a href="#reserve">予約</a>
+        <a href="#access">アクセス</a>
+        <a href="#about">会社概要</a>
+      </nav>
+      <a class="tel-chip" href="tel:0312345678">03-1234-5678</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="kicker">かかりつけの歯科　新宿</p>
+          <h1>新宿で、通い続けられる歯科を。</h1>
+          <p class="lead">検査・説明・治療の順番を先に見えるようにしました。初めての方も、空き枠の確認から来院まで迷わない導線です。実在の医院のロゴ・写真・文言は使っていません。</p>
+          <div class="hero-actions">
+            <a class="btn btn-navy" href="#reserve">予約する</a>
+            <a class="btn btn-ghost" href="#guide">診療案内を見る</a>
+          </div>
+        </div>
+        <aside class="hours-card" aria-labelledby="hours-title">
+          <h2 id="hours-title">診療時間</h2>
+          <dl>
+            <div><dt>月〜金</dt><dd>9時30分〜13時／14時30分〜19時</dd></div>
+            <div><dt>土曜日</dt><dd>9時30分〜13時／14時30分〜17時</dd></div>
+            <div><dt>日・祝</dt><dd>休診</dd></div>
+          </dl>
+          <p class="note">最終受付は終了30分前。急患は当日枠を残しています。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="trust" aria-labelledby="trust-title">
+      <div class="wrap">
+        <h2 id="trust-title">通いやすさの約束</h2>
+        <p class="section-lead">墨と余白で情報を先に置く。予約は動詞で終わらせ、電話番号は常に手元に置きます。</p>
+        <div class="trust-grid" style="margin-top: 40px;">
+          <article>
+            <span class="num">01</span>
+            <h3>初診の流れを公開</h3>
+            <p>問診・撮影・説明・同意の順を、来院前に読めます。当日に初めて知る項目を減らします。</p>
+          </article>
+          <article>
+            <span class="num">02</span>
+            <h3>担当医を指名できる</h3>
+            <p>常勤3名。予防・補綴・小児の担当が分かれているので、続きの治療も同じ顔で話せます。</p>
+          </article>
+          <article>
+            <span class="num">03</span>
+            <h3>キャンセルは前日18時まで</h3>
+            <p>お電話または予約フォームから変更できます。無断キャンセルを減らすためのルールです。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="guide" aria-labelledby="guide-title">
+      <div class="wrap">
+        <h2 id="guide-title">診療案内</h2>
+        <p class="section-lead">保険診療を中心に、説明の時間を先に確保します。自由診療は税込価格を先に示します。</p>
+        <div class="guide-grid">
+          <article>
+            <h3>一般歯科・むし歯</h3>
+            <p>痛みの原因を写真と模型で共有してから治療に入ります。削る量は必要最小に抑えます。</p>
+          </article>
+          <article>
+            <h3>予防・定期検診</h3>
+            <p>3〜6か月ごとの検診と歯石除去。年割のメンテナンス枠もあります。</p>
+          </article>
+          <article>
+            <h3>歯周病</h3>
+            <p>ポケットの数値を毎回記録し、ホームケアの手順を紙でもお渡しします。</p>
+          </article>
+          <article>
+            <h3>小児歯科</h3>
+            <p>保護者同席を標準にしています。フッ素塗布とシーラントの目安も事前に説明します。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section doctors" id="doctors" aria-labelledby="doctors-title">
+      <div class="wrap split">
+        <div>
+          <p class="kicker">スタッフ・設備</p>
+          <h2 id="doctors-title">説明できる設備と、顔の見える担当医</h2>
+          <p class="section-lead">デジタルX線と口腔内カメラで、いま見えている状態をその場で共有します。写真はオリジナルの図形のみです。</p>
+          <div class="muted-panel" style="margin-top: 28px;">
+            <p><strong>青葉 太郎</strong>（院長）　日本歯周病学会所属</p>
+            <p>2014年4月1日開院。新宿勤務の方の夜間最終枠を担当しています。</p>
+            <p style="margin-top: 12px;"><strong>青葉 花子</strong>（副院長）　小児・予防担当</p>
+            <p>土曜日午前の初診枠を中心に、保護者への説明を担当します。</p>
+          </div>
+        </div>
+        <div class="portrait" role="img" aria-label="院内の光と余白を示す抽象的な図"></div>
+      </div>
+    </section>
+
+    <section class="section" id="price" aria-labelledby="price-title">
+      <div class="wrap">
+        <h2 id="price-title">料金</h2>
+        <p class="section-lead">価格はすべて税込です。保険診療は自己負担の目安、自由診療は所要時間も併記します。</p>
+        <div class="price-grid">
+          <article class="price">
+            <h3>検診</h3>
+            <p class="yen">¥4,400（税込）</p>
+            <p>保険診療の自己負担目安。撮影が必要な場合は別にご案内します。</p>
+          </article>
+          <article class="price">
+            <h3>オフィスホワイトニング</h3>
+            <p class="yen">¥12,000（税込）</p>
+            <p>自由診療・所要40分。初回はカウンセリングを同日に行います。</p>
+          </article>
+          <article class="price">
+            <h3>メンテナンス年割</h3>
+            <p class="yen">¥26,400（税込）</p>
+            <p>年3回の定期検診セット。2026年4月1日から適用。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="cta-title">
+      <p>初診の空き枠を、オンラインで確認できます。</p>
+      <h2 id="cta-title">今日の予約枠を見る</h2>
+      <p style="margin-top: 24px;"><a class="btn btn-paper" href="#reserve">予約する</a></p>
+    </section>
+
+    <section class="section" id="access" aria-labelledby="access-title">
+      <div class="wrap">
+        <h2 id="access-title">アクセス</h2>
+        <p class="section-lead">地図と診療時間を同じ視線に置いています。新宿駅西口から地上で4分です。</p>
+        <div class="access-grid">
+          <div class="map-placeholder">
+            <div>
+              <div class="pin" aria-hidden="true"></div>
+              <p>東京都新宿区西新宿1-1-1<br>青葉ビル3階</p>
+              <p>新宿駅西口 徒歩4分</p>
+            </div>
+          </div>
+          <div class="muted-panel">
+            <h3>店舗情報</h3>
+            <p>電話 03-1234-5678</p>
+            <p>メール yoyaku@example.jp</p>
+            <p>バリアフリー：エレベーターあり。車椅子対応の診療室を1室確保。</p>
+            <p>駐車場はありません。近隣の時間貸しをご利用ください。</p>
+            <p style="margin-top: 16px;"><a class="btn btn-ghost" href="#reserve">予約する</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reserve" aria-labelledby="reserve-title">
+      <div class="wrap">
+        <h2 id="reserve-title">予約・お問い合わせ</h2>
+        <p class="section-lead">姓名とフリガナは必須です。送信後に医院から空き枠をご連絡します。このページはデモのため、実送信は行いません。</p>
+        <form class="reserve" id="reserve-form" novalidate>
+          <div class="success" role="status">送信しました。医院からの連絡をお待ちください（デモ表示です）。</div>
+          <div class="fields">
+            <div class="pair">
+              <label>姓<span class="req">必須</span>
+                <input required name="family-name" autocomplete="family-name" placeholder="青葉">
+              </label>
+              <label>名<span class="req">必須</span>
+                <input required name="given-name" autocomplete="given-name" placeholder="太郎">
+              </label>
+              <label>フリガナセイ<span class="req">必須</span>
+                <input required name="family-name-kana" pattern="[ァ-ヶー]+" placeholder="アオバ" title="全角カタカナ">
+              </label>
+              <label>フリガナメイ<span class="req">必須</span>
+                <input required name="given-name-kana" pattern="[ァ-ヶー]+" placeholder="タロウ" title="全角カタカナ">
+              </label>
+            </div>
+            <label>メールアドレス<span class="req">必須</span>
+              <input required type="email" name="email" autocomplete="email" inputmode="email">
+            </label>
+            <label>電話番号
+              <input type="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="ハイフンなし10–11桁">
+            </label>
+            <label>郵便番号<span class="req">必須</span>
+              <input required name="postal-code" autocomplete="postal-code" inputmode="numeric" pattern="\d{7}" placeholder="7桁" title="7桁">
+            </label>
+            <label>都道府県<span class="req">必須</span>
+              <select required name="prefecture" autocomplete="address-level1">
+                <option value="">選択してください</option>
+                <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option>
+                <option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option>
+                <option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option>
+                <option selected>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option>
+                <option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
+                <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option>
+                <option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option>
+                <option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option>
+                <option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option>
+                <option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option>
+                <option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option>
+                <option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option>
+              </select>
+            </label>
+            <label>住所<span class="req">必須</span>
+              <input required name="address" autocomplete="street-address" placeholder="新宿区西新宿1-1-1">
+            </label>
+            <label>ご用件<span class="req">必須</span>
+              <select required name="inquiry">
+                <option value="">ご用件を選択してください</option>
+                <option>初診の予約</option>
+                <option>再診の予約</option>
+                <option>予約の変更・キャンセル</option>
+                <option>その他のお問い合わせ</option>
+              </select>
+            </label>
+            <label>補足
+              <textarea name="inquiry-detail" rows="5" placeholder="希望日時があればご記入ください"></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="btn btn-navy" type="submit">予約する</button>
+              <span>送信前に診療時間とキャンセルポリシーをご確認ください。</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <h2 id="faq-title">よくある質問</h2>
+        <div class="faq-list">
+          <details open>
+            <summary>予約のキャンセルはできますか。</summary>
+            <p>前日の18時まで、お電話またはフォームから変更できます。当日の変更はお電話をお願いします。</p>
+          </details>
+          <details>
+            <summary>初めての来院で必要なものは。</summary>
+            <p>保険証とおくすり手帳をお持ちください。問診は来院前にこのフォームから送れます。</p>
+          </details>
+          <details>
+            <summary>支払い方法は。</summary>
+            <p>窓口では現金・主要クレジットカードに対応しています。自由診療は税込表示です。</p>
+          </details>
+          <details>
+            <summary>紹介状は必要ですか。</summary>
+            <p>不要です。他院からの継続治療がある場合は、可能な範囲で資料をお持ちください。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <h2 id="about-title">会社概要</h2>
+        <table class="info">
+          <tbody>
+            <tr><th>商号</th><td>合同会社 青葉</td></tr>
+            <tr><th>医院名</th><td>青葉歯科医院</td></tr>
+            <tr><th>所在地</th><td>東京都新宿区西新宿1-1-1 青葉ビル3階</td></tr>
+            <tr><th>代表者</th><td>青葉 太郎</td></tr>
+            <tr><th>設立</th><td>2014年4月1日</td></tr>
+            <tr><th>事業</th><td>歯科診療所の運営</td></tr>
+            <tr><th>お問い合わせ</th><td>03-1234-5678 / yoyaku@example.jp</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section legal-block" id="legal" aria-labelledby="legal-title">
+      <div class="wrap">
+        <h2 id="legal-title">特定商取引法に基づく表記</h2>
+        <p class="section-lead">自由診療の通信販売は行っていません。運営者情報のプレースホルダです。</p>
+        <table class="info">
+          <tbody>
+            <tr><th>販売業者</th><td>合同会社 青葉</td></tr>
+            <tr><th>運営統括責任者</th><td>青葉 太郎</td></tr>
+            <tr><th>所在地</th><td>東京都新宿区西新宿1-1-1</td></tr>
+            <tr><th>電話番号</th><td>03-1234-5678</td></tr>
+            <tr><th>メールアドレス</th><td>info@example.jp</td></tr>
+            <tr><th>販売価格</th><td>各メニューに税込価格を表示</td></tr>
+            <tr><th>商品代金以外の必要料金</th><td>来院に伴う交通費は自己負担です</td></tr>
+            <tr><th>支払方法</th><td>来院時の現金またはクレジットカード</td></tr>
+            <tr><th>支払時期</th><td>診療当日の会計時</td></tr>
+            <tr><th>役務の提供時期</th><td>予約確定日</td></tr>
+            <tr><th>キャンセルについて</th><td>前日18時まで無料。それ以降はご連絡ください</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="privacy" aria-labelledby="privacy-title">
+      <div class="wrap">
+        <h2 id="privacy-title">プライバシーポリシー</h2>
+        <p class="section-lead">予約フォームでお預かりした姓名・フリガナ・連絡先は、予約連絡と診療準備以外に使いません。保管期間は最終来院から5年を目安とします。プレースホルダです。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <p>青葉歯科医院</p>
+        <p>東京都新宿区西新宿1-1-1</p>
+        <p><a href="tel:0312345678">03-1234-5678</a></p>
+      </div>
+      <div class="footer-links">
+        <a href="#about">会社概要</a>
+        <a href="#legal">特定商取引法に基づく表記</a>
+        <a href="#privacy">プライバシーポリシー</a>
+      </div>
+      <div class="footer-links">
+        <a href="#reserve">お問い合わせ</a>
+        <a href="#guide">診療案内</a>
+        <a href="#access">アクセス</a>
+      </div>
+    </div>
+    <div class="wrap copy">
+      <p>© 2014 合同会社 青葉　デモページ（recommend_jp の構造参考。実在医院の複製ではありません）</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("reserve-form");
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const kana = /[ァ-ヶー]+/;
+      const sei = form.elements.namedItem("family-name-kana");
+      const mei = form.elements.namedItem("given-name-kana");
+      if (sei instanceof HTMLInputElement && !kana.test(sei.value)) {
+        sei.setCustomValidity("フリガナは全角カタカナで入力してください。");
+        sei.reportValidity();
+        return;
+      }
+      if (mei instanceof HTMLInputElement && !kana.test(mei.value)) {
+        mei.setCustomValidity("フリガナは全角カタカナで入力してください。");
+        mei.reportValidity();
+        return;
+      }
+      if (sei instanceof HTMLInputElement) sei.setCustomValidity("");
+      if (mei instanceof HTMLInputElement) mei.setCustomValidity("");
+      if (!form.reportValidity()) return;
+      form.classList.add("is-sent");
+    });
+  </script>
+</body>
+</html>
