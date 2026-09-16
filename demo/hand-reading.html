@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="手相から、いまの自分とこれからの流れを読み解く本格オンライン手相鑑定。">
+<title>月読庵｜手相鑑定</title>
+<style>
+:root{--ink:#171412;--paper:#f4efe6;--paper2:#fbf8f2;--gold:#b18a4a;--gold2:#d7bb7c;--line:rgba(23,20,18,.16);--muted:#756d63;--serif:"Yu Mincho","Hiragino Mincho ProN","Noto Serif JP",serif;--sans:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.9}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}
+.nav{position:fixed;z-index:10;top:0;left:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(23,20,18,.9);color:#fff;backdrop-filter:blur(14px)}
+.logo{letter-spacing:.18em;font-size:15px}.navlinks{display:flex;gap:28px;font-family:var(--sans);font-size:12px;letter-spacing:.12em}.navcta{border:1px solid rgba(215,187,124,.6);padding:9px 15px;color:#f4dfaa}
+.hero{min-height:100vh;background:radial-gradient(circle at 50% 35%,rgba(177,138,74,.2),transparent 34%),linear-gradient(120deg,#171412,#28211b 58%,#0f0e0d);color:#fff;display:grid;place-items:center;text-align:center;padding:130px 24px 90px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:540px;height:540px;border:1px solid rgba(215,187,124,.22);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-45%);box-shadow:0 0 0 38px rgba(215,187,124,.025),0 0 0 90px rgba(215,187,124,.018)}
+.moon{font-size:12px;letter-spacing:.5em;color:var(--gold2);font-family:var(--sans);position:relative}
+.hero h1{font-size:clamp(38px,7vw,76px);font-weight:400;letter-spacing:.13em;line-height:1.45;margin:28px 0 18px;position:relative}
+.hero h1 em{font-style:normal;color:#ddc38c}.hero p{font-family:var(--sans);font-size:14px;letter-spacing:.15em;color:#d8d0c7;margin:0 auto 38px;position:relative}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 30px;border:1px solid var(--gold2);background:linear-gradient(135deg,#c6a15e,#967037);color:#fff;letter-spacing:.12em;font-family:var(--sans);font-size:13px;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.section{padding:96px 24px}.wrap{max-width:1040px;margin:auto}.eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase}.title{font-size:clamp(28px,4vw,44px);font-weight:400;letter-spacing:.1em;margin:12px 0 25px;line-height:1.5}.lead{color:var(--muted);max-width:680px;font-family:var(--sans);font-size:14px}
+.intro{display:grid;grid-template-columns:1fr 1.3fr;gap:70px;align-items:center}.seal{width:230px;height:290px;margin:auto;border:1px solid var(--gold);display:grid;place-items:center;position:relative;background:linear-gradient(160deg,#201a16,#3a2b1e)}.seal:before,.seal:after{content:"";position:absolute;inset:13px;border:1px solid rgba(215,187,124,.25)}.seal span{writing-mode:vertical-rl;font-size:40px;letter-spacing:.25em;color:#e1c78d}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}.card{padding:32px 26px;background:rgba(255,255,255,.38);border:1px solid var(--line)}.card h3{font-size:20px;font-weight:400;letter-spacing:.1em}.card p{font-family:var(--sans);font-size:13px;color:var(--muted)}
+.dark{background:#1a1613;color:#f8f2e8}.dark .lead{color:#bcb2a7}.dark .eyebrow{color:var(--gold2)}.dark .card{background:rgba(255,255,255,.035);border-color:rgba(215,187,124,.22)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:45px}.step{padding:20px;border-top:1px solid var(--gold)}.num{font-family:var(--sans);font-size:11px;color:var(--gold);letter-spacing:.2em}.step h3{font-size:18px;font-weight:400}.step p{font-family:var(--sans);font-size:12px;color:var(--muted)}
+.quote{padding:90px 24px;text-align:center;background:radial-gradient(circle,#3a2c20,#171310 68%);color:#fff}.quote blockquote{max-width:760px;margin:22px auto;font-size:clamp(22px,3vw,34px);line-height:1.9;font-weight:400}.quote small{font-family:var(--sans);color:#c9bdad}
+.formarea{background:var(--paper2)}.form{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:22px}.field.full{grid-column:1/-1}.field label{display:block;font-size:13px;letter-spacing:.08em;margin-bottom:8px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#fffaf1;padding:13px 14px;outline:none}.field textarea{min-height:150px;resize:vertical}.upload{border:1px dashed #a99270;padding:26px;text-align:center;background:#fffaf1;font-family:var(--sans);font-size:12px;color:var(--muted);cursor:pointer}.preview{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.preview img{width:88px;height:88px;object-fit:cover;border:1px solid var(--line)}
+.price{display:flex;align-items:baseline;gap:8px;margin:8px 0 20px}.price strong{font-family:var(--sans);font-size:34px;font-weight:500}.note{font-family:var(--sans);font-size:11px;color:var(--muted)}
+.faq{border-top:1px solid var(--line)}details{border-bottom:1px solid var(--line);padding:20px 0}summary{cursor:pointer;list-style:none;font-size:16px;letter-spacing:.05em}summary::-webkit-details-marker{display:none}details p{font-family:var(--sans);font-size:13px;color:var(--muted);max-width:800px}
+.footer{background:#151210;color:#9f958a;padding:55px 24px;font-family:var(--sans);font-size:11px}.footer .wrap{display:flex;justify-content:space-between;gap:30px}.legal{display:flex;gap:20px}
+@media(max-width:760px){.nav{height:60px}.navlinks{display:none}.hero{min-height:92vh}.intro,.form{grid-template-columns:1fr}.seal{width:180px;height:220px}.cards,.steps{grid-template-columns:1fr}.section{padding:72px 20px}.footer .wrap{display:block}.legal{margin-top:20px;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="#">月読庵｜TSUKUYOMI</a>
+  <nav class="navlinks"><a href="#about">鑑定について</a><a href="#method">鑑定方法</a><a href="#voice">お客様の声</a><a href="#faq">FAQ</a></nav>
+  <a class="navcta" href="#request">鑑定を依頼する</a>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <div class="moon">PALM READING / TSUKUYOMI</div>
+    <h1>手のひらに刻まれた<br><em>あなたの物語</em>を読む。</h1>
+    <p>線の一本一本、その濃淡、向き、交わりまで。<br>写真からでは見落とされがちな細部まで丁寧に読み解く、本格オンライン手相鑑定。</p>
+    <a class="btn" href="#request">手相鑑定を申し込む　→</a>
+  </div>
+</section>
+
+<section class="section" id="about">
+<div class="wrap intro">
+  <div class="seal"><span>月読庵</span></div>
+  <div>
+    <div class="eyebrow">PHILOSOPHY</div>
+    <h2 class="title">「当てる」だけではなく、<br>「どう生きるか」まで。</h2>
+    <p class="lead">手相は固定された未来を断定するものではなく、現在の傾向や選択を見つめるための伝統的な占術です。月読庵では、主要線だけでなく丘・補助線・左右差などを総合的に読み、恋愛、仕事、金運、人生の転機を一つの物語として鑑定します。</p>
+  </div>
+</div>
+</section>
+
+<section class="section dark" id="method">
+<div class="wrap">
+  <div class="eyebrow">READING METHOD</div>
+  <h2 class="title">細部から、全体像へ。</h2>
+  <p class="lead">一つの線だけで結論を出さず、複数のサインを照合して読み解きます。</p>
+  <div class="cards">
+    <article class="card"><div class="eyebrow">01 / LINES</div><h3>主要線</h3><p>生命線・知能線・感情線・運命線などの長さ、深さ、起点、終点、分岐を確認。</p></article>
+    <article class="card"><div class="eyebrow">02 / MOUNTS</div><h3>丘と指</h3><p>手のひらの張り、各丘の発達、指の形やバランスから性質と行動傾向を読み解きます。</p></article>
+    <article class="card"><div class="eyebrow">03 / TIMING</div><h3>流れと転機</h3><p>線上の変化や複数のサインを重ね、今後のテーマや意識すべき時期を整理します。</p></article>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap">
+  <div class="eyebrow">HOW IT WORKS</div>
+  <h2 class="title">依頼から鑑定書まで</h2>
+  <div class="steps">
+    <div class="step"><div class="num">STEP 01</div><h3>写真を送る</h3><p>左右の手のひらを明るい場所で撮影。</p></div>
+    <div class="step"><div class="num">STEP 02</div><h3>悩みを伝える</h3><p>特に知りたいテーマを自由に記入。</p></div>
+    <div class="step"><div class="num">STEP 03</div><h3>丁寧に鑑定</h3><p>手相全体を照合し、文章で読み解きます。</p></div>
+    <div class="step"><div class="num">STEP 04</div><h3>鑑定書を受け取る</h3><p>オンラインで確認できる鑑定結果をお届け。</p></div>
+  </div>
+</div>
+</section>
+
+<section class="quote" id="voice">
+  <div class="eyebrow">CLIENT VOICES</div>
+  <blockquote>「自分でも気づいていなかった部分まで言葉にしてもらえて、これから何を大切にしたいかが整理できました。」</blockquote>
+  <small>※掲載するお客様の声は、実際の利用者から許諾を得たものに差し替えてください。</small>
+</section>
+
+<section class="section formarea" id="request">
+<div class="wrap">
+  <div class="eyebrow">REQUEST A READING</div>
+  <h2 class="title">手相鑑定を依頼する</h2>
+  <p class="lead">まずは写真とご相談内容をお送りください。送信後の決済・鑑定開始フローは運用に合わせて接続できます。</p>
+  <div class="form">
+    <div class="field"><label>お名前</label><input placeholder="山田 太郎"></div>
+    <div class="field"><label>メールアドレス</label><input type="email" placeholder="example@email.com"></div>
+    <div class="field"><label>鑑定メニュー</label><select><option>総合手相鑑定｜¥5,500（税込）</option><option>恋愛・結婚鑑定｜¥4,400（税込）</option><option>仕事・金運鑑定｜¥4,400（税込）</option></select></div>
+    <div class="field"><label>利き手</label><select><option>右利き</option><option>左利き</option><option>両利き</option></select></div>
+    <div class="field full"><label>手のひら写真（左右）</label>
+      <label class="upload">クリックして写真を選択<input id="photos" type="file" accept="image/*" multiple hidden></label>
+      <div class="preview" id="preview"></div>
+    </div>
+    <div class="field full"><label>今回、特に知りたいこと</label><textarea placeholder="恋愛、仕事、転機、金運など、気になっていることを自由にお書きください。"></textarea></div>
+    <div class="field full"><button class="btn" type="button" onclick="submitRequest()">鑑定依頼を送信する　→</button><div class="note" style="margin-top:10px">※これはフロントエンド試作です。実運用では送信・決済・個人情報管理を接続してください。</div></div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="faq">
+<div class="wrap">
+  <div class="eyebrow">FAQ</div><h2 class="title">よくあるご質問</h2>
+  <div class="faq">
+    <details><summary>写真はどのように撮ればいいですか？</summary><p>自然光または明るい照明の下で、手のひら全体が写るように撮影してください。ピントが線に合っていること、影で線が隠れていないことが重要です。</p></details>
+    <details><summary>右手と左手、どちらを送ればいいですか？</summary><p>両手をおすすめします。左右の違いを見ることで、先天的な傾向と現在の状態を比較しやすくなります。</p></details>
+    <details><summary>鑑定結果はどのくらいで届きますか？</summary><p>実運用時の受付状況に応じて、ここに納期を明記してください。</p></details>
+    <details><summary>将来のことを断定してもらえますか？</summary><p>手相は未来を科学的に予測・保証するものではありません。鑑定は娯楽・自己理解のための情報としてご利用ください。</p></details>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="footer"><div class="wrap"><div>© TSUKUYOMI-AN</div><div class="legal"><a href="#">特定商取引法に基づく表記</a><a href="#">プライバシーポリシー</a></div></div></footer>
+<script>
+const input=document.getElementById('photos'),preview=document.getElementById('preview');
+input.addEventListener('change',()=>{preview.innerHTML='';[...input.files].slice(0,6).forEach(f=>{const img=document.createElement('img');img.src=URL.createObjectURL(f);preview.appendChild(img)})});
+function submitRequest(){alert('鑑定依頼フォームの試作です。実運用では決済・メール通知・画像保存・管理画面を接続します。')}
+</script>
+</body></html>
